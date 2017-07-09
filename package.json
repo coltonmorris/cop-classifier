@@ -1,0 +1,23 @@
+{
+  "name": "new_cop_classifier",
+  "version": "1.0.0",
+  "description": "---",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coltonmorris/cop-classifier.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coltonmorris/cop-classifier/issues"
+  },
+  "homepage": "https://github.com/coltonmorris/cop-classifier#readme",
+  "dependencies": {
+    "shelljs": "^0.7.8"
+  }
+}
