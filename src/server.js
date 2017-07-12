@@ -1,46 +1,42 @@
 'use strict'
 
-// TODO Figure out why dockerfile cmd isn't running
-
-let grpc = require('grpc')
-let protofile = __dirname + '/../proto/main.proto'
-let mainProto = grpc.load(protofile).main
-let _ = require('lodash')
+let express   = require('express')
+let path      = require('path')
+let app       = express()
+let bodyParser = require('body-parser')
 let handlers = require('./handlers.js')
 
 
-/**
- * Implements the Url RPC method.
- */
-function classifyUrl(call, callback) {
-  let url = call.request.url
+app.use(bodyParser.json())
+
+
+app.post('/', (req, res) => {
+  console.log('request just came in')
+
+  let url = req.body.url
   let filename = 'tmp.jpg'
 
   if (_.isEmpty(url) ||  !(_.endsWith(url, '.jpg'))) {
-    callback(Error('Url must end with .jpg'), null)
+    res.send({error: 'Url must end with .jpg' })
   }
   else {
     handlers.downloadImage(url,filename)
     .then((res) => {
       console.log('downloaded')
-      callback(null, { msg: handlers.classifyImage(filename) })
+      handlers.classifyImage(filename)
+      .then((result) => {
+        console.log('sending result')
+        res.send({msg: result})
+      })
     })
     .catch((err) => {
-      callback(err, null)
+      console.log('sending error')
+      res.send({error: error})
     })
   }
-}
+})
 
-/**
- * Starts an RPC server that receives requests for the Writer service at the
- * sample server port
- */
-function main() {
-  var server = new grpc.Server()
-  server.addService(mainProto.Classify.service, {classifyUrl: classifyUrl})
-  server.bind('localhost:8080', grpc.ServerCredentials.createInsecure())
-  console.log('Listening for gRpc on localhost:8080')
-  server.start()
-}
 
-main()
+app.listen(8080, () => {
+  console.log('Server is listening on port 8080')
+})
