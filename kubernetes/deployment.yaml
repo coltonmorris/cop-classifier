@@ -12,6 +12,6 @@ spec:
       containers:
       - name: cop-classifier
         image: gcr.io/my-website-169905/cop-classifier:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
