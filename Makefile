@@ -18,4 +18,4 @@ deploy:
 	kubectl apply -f ./kubernetes
 
 classify:
-	python src/classifier/label_image.py src/classifier/tmp.jpg
+	python src/classifier/label_image.py tmp.jpg

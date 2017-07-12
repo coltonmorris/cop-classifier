@@ -22,6 +22,7 @@ function classifyUrl(call, callback) {
   else {
     handlers.downloadImage(url,filename)
     .then((res) => {
+      console.log('downloaded')
       callback(null, { msg: handlers.classifyImage(filename) })
     })
     .catch((err) => {
@@ -38,7 +39,7 @@ function main() {
   var server = new grpc.Server()
   server.addService(mainProto.Classify.service, {classifyUrl: classifyUrl})
   server.bind('localhost:8080', grpc.ServerCredentials.createInsecure())
-  console.log('Listening for gRpc on localhost:50051')
+  console.log('Listening for gRpc on localhost:8080')
   server.start()
 }
 

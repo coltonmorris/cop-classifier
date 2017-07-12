@@ -34,13 +34,11 @@ module.exports = {
     // TODO just copy the protofile to the other service, no need to make a general repo if I only need 1 proto file
     return exec('make classify')
     .then((res) => {
+      console.log('classifying')
       if (!(_.isEmpty(res.stderr))) {
         throw Error('there was an error in stderr')
       }
       return res.stdout
-    })
-    .catch((err) => {
-      console.log('child problem', err)
     })
   }
 }
