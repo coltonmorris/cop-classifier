@@ -18,6 +18,12 @@
   },
   "homepage": "https://github.com/coltonmorris/cop-classifier#readme",
   "dependencies": {
+    "child-process-promise": "^2.2.1",
+    "grpc": "^1.4.1",
+    "lodash": "^4.17.4",
+    "node-config": "0.0.2",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1",
     "shelljs": "^0.7.8"
   }
 }

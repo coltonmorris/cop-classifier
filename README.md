@@ -7,11 +7,11 @@ Fun fun fun
 ---
 Just run:
 ```bash
-python retrain.py \
-  --bottleneck_dir=bottlenecks \
-  --model_dir=inception \
-  --output_graph=retrained_graph.pb \
-  --output_labels=retrained_labels.txt \
+python src/classifier/retrain.py \
+  --bottleneck_dir=src/classifier/bottlenecks \
+  --model_dir=src/classifier/inception \
+  --output_graph=src/classifier/retrained_graph.pb \
+  --output_labels=src/classifier/retrained_labels.txt \
   --image_dir=data
 ```
 
@@ -19,7 +19,7 @@ python retrain.py \
 ---
 Just run:
 ```bash
-python label_image.py tmp.jpg
+python src/classifier/label_image.py src/classifier/tmp.jpg
 ```
 
 ### Notes
