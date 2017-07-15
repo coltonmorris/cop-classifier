@@ -19,3 +19,6 @@ deploy:
 
 classify:
 	python src/classifier/label_image.py tmp.jpg
+
+local:
+	kubectl delete deployment cop-classifier; kubectl delete pods (kubectl get pods | grep cop | awk '{print $1}'); make build; make deploy

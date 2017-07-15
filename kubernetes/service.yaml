@@ -4,8 +4,8 @@ metadata:
   name: cop-classifier
 spec:
   selector:
-    tier: backend
+    service: cop-classifier
   ports:
     - protocol: TCP
-      port: 2000
-      targetPort: 8080
+      port: 80
+      targetPort: 80

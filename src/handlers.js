@@ -30,15 +30,21 @@ module.exports = {
   downloadImage: downloadImage,
 
   classifyImage: (filename) => {
-    // TODO implement this by calling command line with exec
-    // TODO just copy the protofile to the other service, no need to make a general repo if I only need 1 proto file
-    return exec('make classify')
+    return exec('python src/classifier/label_image.py tmp.jpg')
     .then((res) => {
       console.log('classifying')
-      if (!(_.isEmpty(res.stderr))) {
-        throw Error('there was an error in stderr')
+      console.log('keys: ', Object.keys(res))
+      console.log('output of stdout: ', res.stdout)
+      console.log('output of stderr: ', res.stderr)
+      if (_.isEmpty(res.stdout)) {
+        throw Error('there was no response in stdout')
       }
-      return res.stdout
+      // res.stdout == 'unknown (score = 0.95659)\ncops (score = 0.04341)'
+      let out = res.stdout.split('\n')[0].split(' ')
+      return {
+        person: out[0],
+        result: parseFloat(out[3].slice(0,-1))
+      }
     })
   }
 }
