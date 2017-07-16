@@ -10,12 +10,12 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y
 COPY ./README.md /app
 COPY ./Makefile /app
 COPY ./src/server.js /app/src
+COPY ./src/restifyServer.js /app/src
 COPY ./src/handlers.js /app/src
 COPY ./package.json /app
 COPY ./node_modules /app/node_modules
 COPY ./proto /app/proto
 
-EXPOSE 8080
 
 # for classifying after model is built
 # COPY ./src/classifier/bottlenecks /app/src/classifier/bottlenecks
@@ -31,6 +31,8 @@ COPY ./tmp.jpg /app
 # COPY ./src/classifier/inception /app/src/classifier/inception
 # COPY ./src/classifier/retrain.py /app/src/classifier/retrain.py
 
+EXPOSE 80
 # CMD python label_image.py tmp.jpg
 CMD ["node", "src/server.js"]
+# CMD "bash"
 
